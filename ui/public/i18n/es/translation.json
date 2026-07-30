@@ -1,0 +1,74 @@
+{
+  "common": {
+    "required": "Requerido",
+    "work_in_progress": "En progreso",
+    "processing": "Procesando..."
+  },
+  "status": {
+    "title": "Estado",
+    "app_instance": "Instancia de la aplicación",
+    "services": "Servicio | Servicios",
+    "app_images": "Imagen de la aplicación | Imágenes de la aplicación",
+    "app_volumes": "Volumen de la aplicación | Volúmenes de la aplicación",
+    "installation_node": "Nodo de instalación",
+    "node": "Nodo",
+    "name": "Nombre",
+    "size": "Tamaño",
+    "created": "Creado",
+    "mount": "Montar",
+    "no_services": "No hay servicios",
+    "no_images": "No hay imágenes",
+    "no_volumes": "No hay volúmenes",
+    "pgadmin_webapp": "Aplicación web de Pgadmin",
+    "not_configured": "No configurado",
+    "configure": "Configurar",
+    "open_webapp": "Abrir aplicación web"
+  },
+  "settings": {
+    "title": "Configuraciones",
+    "configure_instance": "Configurar {instance}",
+    "save": "Guardar",
+    "pgadmin_fqdn": "Nombre de host de pgadmin (FQDN)",
+    "lets_encrypt": "Solicitar certificado LE",
+    "http_to_https": "Forzar HTTPS",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "advanced": "Avanzado",
+    "configuring": "Configurando",
+    "instance_configuration": "Configurar postgresql",
+    "tcp_port_pgsql": "Puerto TCP de conexión PostgreSQL",
+    "tcp_port_pgsql_tcp_port_tips": "El puerto TCP está restringido a la red del clúster, lo que significa que no está abierto al público y solo se puede acceder desde dentro del clúster con la IP interna de Wireguard, como 10.5.4.1.",
+    "domain_already_used_in_traefik": "El dominio ya está en uso en Traefik",
+    "host_pattern": "Debe ser un nombre de dominio completamente calificado válido",
+    "host_format": "Debe ser un nombre de dominio completamente calificado válido",
+    "password_tips": "El nombre de usuario y la contraseña predeterminados son 'admin@nethserver.org' y 'Nethesis,1234', cambie esto lo antes posible."
+  },
+  "about": {
+    "title": "Acerca de"
+  },
+  "task": {
+    "cannot_create_task": "No se puede crear la tarea {action}"
+  },
+  "action": {
+    "get-status": "Obtener estado",
+    "get-configuration": "Obtener configuración",
+    "configure-module": "Configurar módulo",
+    "get-module-info": "Obtener información del módulo",
+    "get-name": "Obtener nombre",
+    "list-backup-repositories": "Listar repositorios de copias de seguridad",
+    "list-backups": "Listar copias de seguridad",
+    "list-installed-modules": "Listar módulos instalados"
+  },
+  "error": {
+    "error": "Error",
+    "generic_error": "Algo salió mal",
+    "validation_error": "Error de validación",
+    "network_error": "Error de red",
+    "network_timeout": "Tiempo de espera de la red",
+    "401": "Autenticación no válida",
+    "403": "Operación no autorizada",
+    "404": "Recurso no encontrado",
+    "cannot_retrieve_module_info": "No se puede recuperar la información del módulo",
+    "cannot_retrieve_installed_modules": "No se pueden recuperar los módulos instalados"
+  }
+}

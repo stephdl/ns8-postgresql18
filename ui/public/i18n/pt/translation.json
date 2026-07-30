@@ -1,0 +1,74 @@
+{
+  "common": {
+    "required": "Obrigatório",
+    "work_in_progress": "Em andamento",
+    "processing": "Processando..."
+  },
+  "status": {
+    "title": "Status",
+    "app_instance": "Instância do aplicativo",
+    "services": "Serviço | Serviços",
+    "app_images": "Imagem do aplicativo | Imagens do aplicativo",
+    "app_volumes": "Volume do aplicativo | Volumes do aplicativo",
+    "installation_node": "Nó de instalação",
+    "node": "Nó",
+    "name": "Nome",
+    "size": "Tamanho",
+    "created": "Criado",
+    "mount": "Montar",
+    "no_services": "Sem serviços",
+    "no_images": "Sem imagens",
+    "no_volumes": "Sem volumes",
+    "pgadmin_webapp": "Aplicativo web Pgadmin",
+    "not_configured": "Não configurado",
+    "configure": "Configurar",
+    "open_webapp": "Abrir aplicativo web"
+  },
+  "settings": {
+    "title": "Configurações",
+    "configure_instance": "Configurar {instance}",
+    "save": "Salvar",
+    "pgadmin_fqdn": "Nome do host pgadmin (FQDN)",
+    "lets_encrypt": "Solicitar certificado LE",
+    "http_to_https": "Forçar HTTPS",
+    "enabled": "Habilitado",
+    "disabled": "Desabilitado",
+    "advanced": "Avançado",
+    "configuring": "Configurando",
+    "instance_configuration": "Configurar PostgreSQL",
+    "tcp_port_pgsql": "Porta TCP de conexão PostgreSQL",
+    "tcp_port_pgsql_tcp_port_tips": "A porta TCP é restrita à rede do cluster, o que significa que não está aberta ao público e só pode ser acessada de dentro do cluster com o IP interno do Wireguard, como 10.5.4.1.",
+    "domain_already_used_in_traefik": "Domínio já utilizado no Traefik",
+    "host_pattern": "Deve ser um nome de domínio totalmente qualificado válido",
+    "host_format": "Deve ser um nome de domínio totalmente qualificado válido",
+    "password_tips": "O nome de usuário e a senha padrão são 'admin@nethserver.org' e 'Nethesis,1234', altere-os o mais rápido possível."
+  },
+  "about": {
+    "title": "Sobre"
+  },
+  "task": {
+    "cannot_create_task": "Não é possível criar a tarefa {action}"
+  },
+  "action": {
+    "get-status": "Obter status",
+    "get-configuration": "Obter configuração",
+    "configure-module": "Configurar módulo",
+    "get-module-info": "Obter informações do módulo",
+    "get-name": "Obter nome",
+    "list-backup-repositories": "Listar repositórios de backup",
+    "list-backups": "Listar backups",
+    "list-installed-modules": "Listar módulos instalados"
+  },
+  "error": {
+    "error": "Erro",
+    "generic_error": "Algo deu errado",
+    "validation_error": "Erro de validação",
+    "network_error": "Erro de rede",
+    "network_timeout": "Tempo limite de rede",
+    "401": "Autenticação inválida",
+    "403": "Operação não autorizada",
+    "404": "Recurso não encontrado",
+    "cannot_retrieve_module_info": "Não é possível recuperar as informações do módulo",
+    "cannot_retrieve_installed_modules": "Não é possível recuperar os módulos instalados"
+  }
+}

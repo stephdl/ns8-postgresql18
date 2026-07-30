@@ -1,0 +1,74 @@
+{
+  "common": {
+    "required": "مطلوب",
+    "work_in_progress": "جاري العمل",
+    "processing": "جاري المعالجة..."
+  },
+  "status": {
+    "title": "الحالة",
+    "app_instance": "مثيل التطبيق",
+    "services": "الخدمة | الخدمات",
+    "app_images": "صورة التطبيق | صور التطبيق",
+    "app_volumes": "حجم التطبيق | أحجام التطبيق",
+    "installation_node": "عقدة التثبيت",
+    "node": "العقدة",
+    "name": "الاسم",
+    "size": "الحجم",
+    "created": "تم الإنشاء",
+    "mount": "تركيب",
+    "no_services": "لا توجد خدمات",
+    "no_images": "لا توجد صور",
+    "no_volumes": "لا توجد أحجام",
+    "pgadmin_webapp": "تطبيق الويب Pgadmin",
+    "not_configured": "غير مُكوَّن",
+    "configure": "تكوين",
+    "open_webapp": "فتح تطبيق الويب"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "configure_instance": "تكوين {instance}",
+    "save": "حفظ",
+    "pgadmin_fqdn": "اسم مضيف pgadmin (FQDN)",
+    "lets_encrypt": "طلب شهادة LE",
+    "http_to_https": "فرض HTTPS",
+    "enabled": "مفعل",
+    "disabled": "غير مفعل",
+    "advanced": "متقدم",
+    "configuring": "يتم التكوين",
+    "instance_configuration": "تكوين PostgreSQL",
+    "tcp_port_pgsql": "منفذ الاتصال بـ PostgreSQL (TCP)",
+    "tcp_port_pgsql_tcp_port_tips": "منفذ TCP مقيد بشبكة الكتلة، مما يعني أنه غير مفتوح للعامة ويمكن الوصول إليه فقط من داخل الكتلة باستخدام عنوان IP الداخلي لـ WireGuard مثل 10.5.4.1",
+    "domain_already_used_in_traefik": "النطاق مستخدم بالفعل في Traefik",
+    "host_pattern": "يجب أن يكون اسم نطاق مؤهل بالكامل صالحًا",
+    "host_format": "يجب أن يكون اسم نطاق مؤهل بالكامل صالحًا",
+    "password_tips": "اسم المستخدم وكلمة المرور الافتراضية هما 'admin@nethserver.org' و 'Nethesis,1234'، قم بتغييرهما في أقرب وقت ممكن"
+  },
+  "about": {
+    "title": "حول"
+  },
+  "task": {
+    "cannot_create_task": "تعذر إنشاء المهمة {action}"
+  },
+  "action": {
+    "get-status": "الحصول على الحالة",
+    "get-configuration": "الحصول على التكوين",
+    "configure-module": "تكوين الوحدة",
+    "get-module-info": "الحصول على معلومات الوحدة",
+    "get-name": "الحصول على الاسم",
+    "list-backup-repositories": "قائمة مستودعات النسخ الاحتياطي",
+    "list-backups": "قائمة النسخ الاحتياطية",
+    "list-installed-modules": "قائمة الوحدات المثبتة"
+  },
+  "error": {
+    "error": "خطأ",
+    "generic_error": "حدث خطأ ما",
+    "validation_error": "خطأ في التحقق",
+    "network_error": "خطأ في الشبكة",
+    "network_timeout": "انتهاء مهلة الشبكة",
+    "401": "مصادقة غير صالحة",
+    "403": "العملية غير مصرح بها",
+    "404": "المورد غير موجود",
+    "cannot_retrieve_module_info": "تعذر استرجاع معلومات الوحدة",
+    "cannot_retrieve_installed_modules": "تعذر استرجاع الوحدات المثبتة"
+  }
+}

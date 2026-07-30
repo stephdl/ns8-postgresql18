@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e
+
+echo "Dumping all PostgreSQL databases"
+podman exec postgresql-app pg_dumpall -U postgres > postgresql.pg_dump

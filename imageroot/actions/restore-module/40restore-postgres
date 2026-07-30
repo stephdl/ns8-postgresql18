@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e -o pipefail
+exec 1>&2 # Redirect any output to the journal (stderr)
+
+mkdir -vp restore
+cat - >restore/postgresql_restore.sh <<'EOS'
+# Read dump file from standard input and restore all databases:
+psql -U postgres -f /tmp/postgresql.pg_dump
+ec=$?
+docker_temp_server_stop
+exit $ec
+EOS
+
+# Override the image /docker-entrypoint-initdb.d contents, to restore the
+# DB dump file. The container will be stopped at the end
+# pgdata is mounted on /var/lib/postgresql, not data/: since 18 the upstream
+# image moved PGDATA to /var/lib/postgresql/18/docker
+
+podman run \
+    --rm \
+    --interactive \
+    --network=none \
+    --volume=./restore:/docker-entrypoint-initdb.d/:Z \
+    --volume=pgdata:/var/lib/postgresql:Z \
+    --volume=./postgresql.pg_dump:/tmp/postgresql.pg_dump:Z \
+    --replace --name=restore_db \
+    --env POSTGRES_USER=postgres \
+    --env POSTGRES_PASSWORD=Nethesis,1234 \
+    --env TZ=UTC \
+    "${POSTGRES_IMAGE}"
+
+
+# If the restore is successful, clean up:
+rm -rfv restore/ postgresql.pg_dump

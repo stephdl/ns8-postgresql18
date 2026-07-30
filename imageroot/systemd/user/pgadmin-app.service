@@ -1,0 +1,47 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  pgadmin-app.service
+BindsTo=postgresql.service
+After=postgresql.service pgadmin-app.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/mkdir -p config
+ExecStartPre=/bin/rm -f %t/pgadmin-app.pid %t/pgadmin-app.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/pgadmin-app.pid \
+    --cidfile %t/pgadmin-app.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/postgresql.pod-id --replace -d --name  pgadmin-app \
+    --volume pgadmin-data:/var/lib/pgadmin:Z \
+    --volume ./config_server.json:/pgadmin4/config_server.json:Z \
+    --volume socket:/var/run/postgresql:z \
+    --env 'PGADMIN_DEFAULT_EMAIL=admin@nethserver.org' \
+    --env 'PGADMIN_DEFAULT_PASSWORD=Nethesis,1234' \
+    --env 'PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True' \
+    --env 'PGADMIN_CONFIG_UPGRADE_CHECK_ENABLED=False' \
+    --env 'PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"' \
+    --env 'PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=40' \
+    --env-file=%S/state/smarthost.env \
+    ${PGADMIN4_IMAGE}
+ExecStartPost=/usr/bin/bash -c "while ! podman exec pgadmin-app /venv/bin/python3 setup.py get-users ;  do sleep 5 ; done"
+ExecStartPost=/usr/bin/podman cp pgpass pgadmin-app:/var/lib/pgadmin/pgpass
+ExecStartPost=/usr/bin/podman exec pgadmin-app chmod 0600 /var/lib/pgadmin/pgpass
+ExecStartPost=/usr/bin/podman exec pgadmin-app /venv/bin/python3 setup.py load-servers config_server.json --replace  --user admin@nethserver.org
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/pgadmin-app.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP pgadmin-app
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/pgadmin-app.ctr-id
+PIDFile=%t/pgadmin-app.pid
+Type=forking
+
+[Install]
+WantedBy=default.target

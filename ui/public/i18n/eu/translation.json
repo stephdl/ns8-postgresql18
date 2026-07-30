@@ -1,0 +1,74 @@
+{
+  "common": {
+    "required": "Beharrezkoa",
+    "work_in_progress": "Prozesuan",
+    "processing": "Prozesatzen..."
+  },
+  "status": {
+    "title": "Egoera",
+    "app_instance": "Aplikazioaren instantzia",
+    "services": "Zerbitzua | Zerbitzuak",
+    "app_images": "Aplikazioaren irudia | Aplikazioaren irudiak",
+    "app_volumes": "Aplikazioaren bolumena | Aplikazioaren bolumenak",
+    "installation_node": "Instalazio nodoa",
+    "node": "Nodoa",
+    "name": "Izena",
+    "size": "Tamaina",
+    "created": "Sortua",
+    "mount": "Muntatu",
+    "no_services": "Ez dago zerbitzurik",
+    "no_images": "Ez dago irudirik",
+    "no_volumes": "Ez dago bolumenik",
+    "pgadmin_webapp": "Pgadmin web aplikazioa",
+    "not_configured": "Ez dago konfiguraturik",
+    "configure": "Konfiguratu",
+    "open_webapp": "Ireki web aplikazioa"
+  },
+  "settings": {
+    "title": "Ezarpenak",
+    "configure_instance": "{instance} konfiguratu",
+    "save": "Gorde",
+    "pgadmin_fqdn": "pgadmin ostalaritza izena (FQDN)",
+    "lets_encrypt": "LE ziurtagiria eskatu",
+    "http_to_https": "HTTPS indartu",
+    "enabled": "Aktibatuta",
+    "disabled": "Desaktibatuta",
+    "advanced": "Aurreratua",
+    "configuring": "Konfiguratzen",
+    "instance_configuration": "Postgresql konfiguratu",
+    "tcp_port_pgsql": "PostgreSQL konexioaren TCP portua",
+    "tcp_port_pgsql_tcp_port_tips": "TCP portua kluster sarean mugatua dago, hau da, ez dago publikoan irekita eta kluster barrutik bakarrik sar daiteke Wireguard IP barneko helbidearekin, adibidez 10.5.4.1.",
+    "domain_already_used_in_traefik": "Domeinuak jada erabiltzen da Traefiken",
+    "host_pattern": "Domeinu osoa izen baliozkoa izan behar da",
+    "host_format": "Domeinu osoa izen baliozkoa izan behar da",
+    "password_tips": "Izena eta pasahitza lehenetsita 'admin@nethserver.org' eta 'Nethesis,1234' dira, aldatu horiek ahalik eta lasterren."
+  },
+  "about": {
+    "title": "Buruz"
+  },
+  "task": {
+    "cannot_create_task": "Ez da {action} eginkizuna sortu"
+  },
+  "action": {
+    "get-status": "Egoera lortu",
+    "get-configuration": "Konfigurazioa lortu",
+    "configure-module": "Modulua konfiguratu",
+    "get-module-info": "Moduluko informazioa lortu",
+    "get-name": "Izena lortu",
+    "list-backup-repositories": "Segurtasun kopia biltegiak zerrendatu",
+    "list-backups": "Segurtasun kopiak zerrendatu",
+    "list-installed-modules": "Instalatutako moduluak zerrendatu"
+  },
+  "error": {
+    "error": "Errore",
+    "generic_error": "Zerbait oker jo da",
+    "validation_error": "Balidazio errorea",
+    "network_error": "Sare errorea",
+    "network_timeout": "Sarearen denbora-pasa",
+    "401": "Autentifikazioa baliogabea",
+    "403": "Operazioa ez baimenduta",
+    "404": "Iturria ez dago",
+    "cannot_retrieve_module_info": "Ez da moduluko informazioa berreskuratu",
+    "cannot_retrieve_installed_modules": "Ez da instalatutako moduluak berreskuratu"
+  }
+}

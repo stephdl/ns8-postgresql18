@@ -1,0 +1,74 @@
+{
+  "common": {
+    "required": "Erforderlich",
+    "work_in_progress": "In Arbeit",
+    "processing": "Wird verarbeitet..."
+  },
+  "status": {
+    "title": "Status",
+    "app_instance": "App-Instanz",
+    "services": "Dienst | Dienste",
+    "app_images": "App-Bild | App-Bilder",
+    "app_volumes": "App-Volumen | App-Volumen",
+    "installation_node": "Installationsknoten",
+    "node": "Knoten",
+    "name": "Name",
+    "size": "Größe",
+    "created": "Erstellt",
+    "mount": "Einbinden",
+    "no_services": "Keine Dienste",
+    "no_images": "Keine Bilder",
+    "no_volumes": "Keine Volumen",
+    "pgadmin_webapp": "Pgadmin-Webanwendung",
+    "not_configured": "Nicht konfiguriert",
+    "configure": "Konfigurieren",
+    "open_webapp": "Webanwendung öffnen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "configure_instance": "Konfigurieren {instance}",
+    "save": "Speichern",
+    "pgadmin_fqdn": "pgadmin Hostname (FQDN)",
+    "lets_encrypt": "LE-Zertifikat anfordern",
+    "http_to_https": "HTTPS erzwingen",
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert",
+    "advanced": "Erweitert",
+    "configuring": "Konfiguriert wird",
+    "instance_configuration": "Postgresql konfigurieren",
+    "tcp_port_pgsql": "PostgreSQL-Verbindungs-TCP-Port",
+    "tcp_port_pgsql_tcp_port_tips": "Der TCP-Port ist auf das Cluster-Netzwerk beschränkt, was bedeutet, dass er nicht für die Öffentlichkeit zugänglich ist und nur innerhalb des Clusters mit der internen Wireguard-IP wie 10.5.4.1 zugänglich ist.",
+    "domain_already_used_in_traefik": "Domain wird bereits in Traefik verwendet",
+    "host_pattern": "Muss ein gültiger vollqualifizierter Domainname sein",
+    "host_format": "Muss ein gültiger vollqualifizierter Domainname sein",
+    "password_tips": "Der Standardbenutzername und das Standardpasswort sind 'admin@nethserver.org' und 'Nethesis,1234'. Bitte ändern Sie diese so schnell wie möglich."
+  },
+  "about": {
+    "title": "Über"
+  },
+  "task": {
+    "cannot_create_task": "Kann Aufgabe {action} nicht erstellen"
+  },
+  "action": {
+    "get-status": "Status abrufen",
+    "get-configuration": "Konfiguration abrufen",
+    "configure-module": "Modul konfigurieren",
+    "get-module-info": "Modulinformationen abrufen",
+    "get-name": "Name abrufen",
+    "list-backup-repositories": "Backup-Repositories auflisten",
+    "list-backups": "Backups auflisten",
+    "list-installed-modules": "Installierte Module auflisten"
+  },
+  "error": {
+    "error": "Fehler",
+    "generic_error": "Etwas ist schief gelaufen",
+    "validation_error": "Validierungsfehler",
+    "network_error": "Netzwerkfehler",
+    "network_timeout": "Netzwerkzeitüberschreitung",
+    "401": "Ungültige Authentifizierung",
+    "403": "Operation nicht autorisiert",
+    "404": "Ressource nicht gefunden",
+    "cannot_retrieve_module_info": "Modulinformationen können nicht abgerufen werden",
+    "cannot_retrieve_installed_modules": "Installierte Module können nicht abgerufen werden"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "postgresql18",
+      "Group": "Servers",
+      "Host": "/var/run/postgresql/",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Username": "postgres",
+      "TunnelPort": "22",
+      "KerberosAuthentication": false,
+      "ConnectionParameters": {
+        "passfile": "../../pgpass"
+      }
+    }
+  }
+}

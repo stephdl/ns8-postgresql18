@@ -1,0 +1,37 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman postgresql-app.service
+BindsTo=postgresql.service
+After=postgresql.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=%S/state/secrets/passwords.env
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/rm -f %t/postgresql-app.pid %t/postgresql-app.ctr-id
+# Since 18 the upstream image moved PGDATA to /var/lib/postgresql/18/docker and
+# the volume to /var/lib/postgresql, so pgdata must not be mounted on data/
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgresql-app.pid \
+    --cidfile %t/postgresql-app.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/postgresql.pod-id --replace -d --name postgresql-app \
+    --env-file=%S/state/environment \
+    --volume pgdata:/var/lib/postgresql:Z \
+    --volume socket:/var/run/postgresql:z \
+    --env POSTGRES_USER=postgres \
+    --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+    ${POSTGRES_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postgresql-app.ctr-id -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/postgresql-app.ctr-id
+ExecReload=/usr/bin/podman kill -s HUP postgresql-app
+SyslogIdentifier=%u
+PIDFile=%t/postgresql-app.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
