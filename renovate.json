@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>NethServer/.github:ns8"
+  ],
+  "packageRules": [
+    {
+      "description": "Stay on the PostgreSQL 18 branch: a major bump needs the pgdata volume path reviewed, see README",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["postgres"],
+      "allowedVersions": "<19"
+    }
   ]
 }
