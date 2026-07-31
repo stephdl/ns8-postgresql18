@@ -11,5 +11,10 @@ echo "Dumping all PostgreSQL databases"
 # Drop CREATE ROLE postgres: the role always pre-exists in the container that
 # replays this dump, and that lone expected error is what forced the restore to
 # run without ON_ERROR_STOP. pipefail keeps a failing pg_dumpall fatal.
+# Write through a temporary name: the shell truncates the target before
+# pg_dumpall runs, and a failed dump would otherwise leave an empty
+# postgresql.pg_dump behind, which state-include.conf would happily back up and
+# a restore would replay as a successful no-op.
 podman exec postgresql-app pg_dumpall -U postgres \
-    | sed '/^CREATE ROLE postgres;$/d' > postgresql.pg_dump
+    | sed '/^CREATE ROLE postgres;$/d' > postgresql.pg_dump.tmp
+mv postgresql.pg_dump.tmp postgresql.pg_dump
