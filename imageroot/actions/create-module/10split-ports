@@ -43,7 +43,3 @@ tcp_port_pgadmin = env_tcp_ports[1]
 # Setup configuration from user input.
 agent.set_env("TCP_PORT_PGSQL", tcp_port_pgsql)
 agent.set_env("TCP_PORT_PGADMIN", tcp_port_pgadmin)
-
-# Make sure everything is saved inside the environment file
-# just before starting systemd unit
-agent.dump_env()

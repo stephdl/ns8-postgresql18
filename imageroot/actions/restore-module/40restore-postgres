@@ -10,8 +10,8 @@ exec 1>&2 # Redirect any output to the journal (stderr)
 
 mkdir -vp restore
 cat - >restore/postgresql_restore.sh <<'EOS'
-# Read dump file from standard input and restore all databases:
-psql -U postgres -f /tmp/postgresql.pg_dump
+# module-dump-state already stripped the one statement expected to fail here
+psql -U postgres -v ON_ERROR_STOP=on -f /tmp/postgresql.pg_dump
 ec=$?
 docker_temp_server_stop
 exit $ec

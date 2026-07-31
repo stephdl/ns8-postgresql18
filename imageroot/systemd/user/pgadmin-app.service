@@ -6,7 +6,8 @@
 [Unit]
 Description=Podman  pgadmin-app.service
 BindsTo=postgresql.service
-After=postgresql.service pgadmin-app.service
+# postgres must seed the shared socket volume: pgadmin's ownership locks it out
+After=postgresql.service postgresql-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

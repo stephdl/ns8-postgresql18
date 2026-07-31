@@ -5,7 +5,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-set -e
+set -e -o pipefail
 
 echo "Dumping all PostgreSQL databases"
-podman exec postgresql-app pg_dumpall -U postgres > postgresql.pg_dump
+# The container replaying this dump always has role postgres already.
+# Temporary name: state-include.conf backs up postgresql.pg_dump, and an empty
+# one would restore as a successful no-op.
+podman exec postgresql-app pg_dumpall -U postgres \
+    | sed '/^CREATE ROLE postgres;$/d' > postgresql.pg_dump.tmp
+mv postgresql.pg_dump.tmp postgresql.pg_dump
