@@ -26,6 +26,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgresql-app.pid \
     --env POSTGRES_USER=postgres \
     --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
     ${POSTGRES_IMAGE}
+# Type=forking reports success as soon as the container is created, while
+# postgres is still running initdb inside it
+ExecStartPost=/usr/bin/bash -c 'until podman exec postgresql-app pg_isready -q -U postgres; do sleep 2; done'
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postgresql-app.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/postgresql-app.ctr-id
 ExecReload=/usr/bin/podman kill -s HUP postgresql-app
