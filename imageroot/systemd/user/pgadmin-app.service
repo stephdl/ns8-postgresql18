@@ -6,9 +6,7 @@
 [Unit]
 Description=Podman  pgadmin-app.service
 BindsTo=postgresql.service
-# postgresql-app must seed the shared socket volume first: podman copies the
-# image directory ownership into an empty volume, and pgadmin's uid/gid leaves
-# postgres unable to write its lock file
+# postgres must seed the shared socket volume: pgadmin's ownership locks it out
 After=postgresql.service postgresql-app.service
 
 [Service]

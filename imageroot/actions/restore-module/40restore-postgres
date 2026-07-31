@@ -10,8 +10,7 @@ exec 1>&2 # Redirect any output to the journal (stderr)
 
 mkdir -vp restore
 cat - >restore/postgresql_restore.sh <<'EOS'
-# The dump is already stripped of CREATE ROLE postgres by module-dump-state, so
-# any error here is a real one and must fail the restore.
+# module-dump-state already stripped the one statement expected to fail here
 psql -U postgres -v ON_ERROR_STOP=on -f /tmp/postgresql.pg_dump
 ec=$?
 docker_temp_server_stop
