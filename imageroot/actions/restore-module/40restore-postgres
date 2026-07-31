@@ -10,12 +10,9 @@ exec 1>&2 # Redirect any output to the journal (stderr)
 
 mkdir -vp restore
 cat - >restore/postgresql_restore.sh <<'EOS'
-# pg_dumpall emits CREATE ROLE postgres, which the fresh container always has
-# already. Drop that one statement so ON_ERROR_STOP can turn every other failure
-# into a failed restore, instead of psql exiting 0 on a half-restored cluster.
-# Filtering here rather than at dump time keeps older snapshots restorable.
-sed '/^CREATE ROLE postgres;$/d' /tmp/postgresql.pg_dump >/tmp/postgresql_restore.sql
-psql -U postgres -v ON_ERROR_STOP=on -f /tmp/postgresql_restore.sql
+# The dump is already stripped of CREATE ROLE postgres by module-dump-state, so
+# any error here is a real one and must fail the restore.
+psql -U postgres -v ON_ERROR_STOP=on -f /tmp/postgresql.pg_dump
 ec=$?
 docker_temp_server_stop
 exit $ec
