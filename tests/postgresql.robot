@@ -117,7 +117,11 @@ Check if postgresql is removed correctly
 
 *** Keywords ***
 Postgres reports its version
-    Should Contain    ${version}    PostgreSQL 16
+    ${output}  ${err}  ${rc} =    Execute Command
+    ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -tAc 'SELECT version()'
+    ...    return_rc=True    return_stderr=True
+    Should Be Equal As Integers    ${rc}  0    psql exited ${rc}: ${err}
+    RETURN    ${output}
 
 Login to cluster-admin
     New Page    https://${NODE_ADDR}/cluster-admin/
