@@ -1,2 +1,4 @@
-robotframework
+# RETURN needs Robot Framework 5 or later: the browser runner image ships 4.1.2,
+# and an unpinned requirement leaves it in place.
+robotframework>=7.0
 robotframework-sshlibrary
