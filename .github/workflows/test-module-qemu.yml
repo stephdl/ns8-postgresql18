@@ -33,12 +33,8 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    # TEMPORARY: pinned to the branch of stephdl/ns8-ci-actions#12 so this pull
-    # request can be validated before that one lands. Both refs go back to @v1,
-    # and ci_actions_ref disappears, once it is merged.
-    uses: stephdl/ns8-ci-actions/.github/workflows/test-module-qemu.yml@ci/dropin-test-module
+    uses: stephdl/ns8-ci-actions/.github/workflows/test-module-qemu.yml@v1
     with:
-      ci_actions_ref: ci/dropin-test-module
       # build-images.sh publishes as v18postgresql, not as the name module-info
       # derives from the repository, so the name is spelled out here.
       image_name: v18postgresql
