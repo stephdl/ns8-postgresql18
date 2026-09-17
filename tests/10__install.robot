@@ -35,11 +35,24 @@ Check postgresql path is configured
     # repository does not own is not something CI should do on every push.
     Should Not Be True    ${LE_ENCRYPT}
 
+Seed a probe row before the update
+    [Documentation]    Renovate bumps the postgres:18.x tag from time to time:
+    ...                same major version, new binary. This is what the update
+    ...                scenario actually exercises, and configuration surviving
+    ...                it says nothing about data doing the same.
+    Skip If    '${SCENARIO}' != 'update'    scenario is ${SCENARIO}, nothing to seed
+    Wait Until Keyword Succeeds    20 times    3 seconds    Postgres accepts connections
+    ${rc} =    Execute Command
+    ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -c "CREATE TABLE upgrade_probe (id serial primary key, note text); INSERT INTO upgrade_probe (note) VALUES ('pre-upgrade');"
+    ...    return_rc=True    return_stdout=False
+    Should Be Equal As Integers    ${rc}  0
+
 Check if postgresql survives the update
     [Documentation]    Upgrades the baseline installed above to the image under
-    ...                test, then reads the configuration back. A migration that
-    ...                drops the settings is what this case is here to catch.
-    ...                The cases after it then run against the upgraded module.
+    ...                test, then reads the configuration and the probe row
+    ...                back. A migration that drops either is what this case
+    ...                is here to catch. The cases after it then run against
+    ...                the upgraded module.
     Skip If    '${SCENARIO}' != 'update'    scenario is ${SCENARIO}, nothing to update
     ${rc} =    Execute Command
     ...    api-cli run update-module --data '{"force":true,"module_url":"${IMAGE_URL}","instances":["${module_id}"]}'
@@ -49,3 +62,15 @@ Check if postgresql survives the update
     Should Be Equal    ${ocfg['host']}    ${HOST}
     Should Be Equal    ${ocfg['http2https']}    ${HTTP2HTTPS}
     Should Be Equal    ${ocfg['lets_encrypt']}    ${LE_ENCRYPT}
+    ${out}  ${rc} =    Execute Command
+    ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -tAc "SELECT note FROM upgrade_probe WHERE note='pre-upgrade'"
+    ...    return_rc=True
+    Should Be Equal As Integers    ${rc}  0
+    Should Contain    ${out}    pre-upgrade
+
+*** Keywords ***
+Postgres accepts connections
+    ${rc} =    Execute Command
+    ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -tAc 'SELECT 1'
+    ...    return_rc=True    return_stdout=False
+    Should Be Equal As Integers    ${rc}  0
