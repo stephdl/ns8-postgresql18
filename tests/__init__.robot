@@ -3,11 +3,10 @@ Library           SSHLibrary
 
 *** Variables ***
 ${SSH_KEYFILE}    %{HOME}/.ssh/id_ecdsa
-# install tests the image on a clean node, update installs ${UPDATE_FROM} first
-# and upgrades to it. The CI passes both with -v; the defaults keep the suite
-# runnable by hand.
+# install tests the image on a clean node, update installs ${UPDATE_FROM}
+# first then upgrades to it. update-only, CI always passes it via -v; a
+# manual update run must pass it too, there is no built-in default.
 ${SCENARIO}       install
-${UPDATE_FROM}    ghcr.io/stephdl/v18postgresql:latest
 
 *** Keywords ***
 Connect to the node
