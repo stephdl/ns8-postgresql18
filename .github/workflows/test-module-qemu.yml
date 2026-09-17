@@ -42,5 +42,7 @@ jobs:
       # build-images.sh publishes as v18postgresql, not as the name module-info
       # derives from the repository, so the name is spelled out here.
       image_name: v18postgresql
+      # opt-in: tests/10__install.robot already branches on $SCENARIO.
+      scenarios: '["install","update"]'
       ui_tests_strategy: ${{ github.event.inputs.ui_tests == 'true' && 'always' || 'on_renovate_ui_change' }}
       debug_shell: ${{ github.event.inputs.debug_shell == 'true' }}
