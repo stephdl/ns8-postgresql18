@@ -1,4 +1,4 @@
-name: "Test module"
+name: "Test module on QEMU"
 
 # Boots a throwaway NS8 node on the runner and runs tests/ against it, so the
 # module is tested without any external infrastructure. Chained on the build:
