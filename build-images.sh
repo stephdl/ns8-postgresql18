@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/dpage/pgadmin4:9.16 docker.io/postgres:18.6-bookworm" \
+    --label="org.nethserver.images=docker.io/dpage/pgadmin4:9.17 docker.io/postgres:18.6-bookworm" \
     --label="org.nethserver.min-core=3.20.1" \
     "${container}"
 # Commit the image
