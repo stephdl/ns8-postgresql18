@@ -46,3 +46,5 @@ jobs:
       scenarios: '["install","update"]'
       ui_tests_strategy: ${{ github.event.inputs.ui_tests == 'true' && 'always' || 'on_renovate_ui_change' }}
       debug_shell: ${{ github.event.inputs.debug_shell == 'true' }}
+      # vm_mem: 8192                   # guest memory, MiB
+      # disk_size: 30G                 # guest disk after resize
