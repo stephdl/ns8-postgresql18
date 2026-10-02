@@ -4,10 +4,8 @@ Library           SSHLibrary
 *** Variables ***
 ${SSH_KEYFILE}    %{HOME}/.ssh/id_ecdsa
 # install tests the image on a clean node, update installs the newest
-# release first then upgrades to it. Pass -v UPDATE_FROM:<image> to start
-# the update from another image.
+# release first then upgrades to it.
 ${SCENARIO}       install
-${UPDATE_FROM}    ${EMPTY}
 
 *** Keywords ***
 Connect to the node

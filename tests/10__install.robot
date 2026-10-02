@@ -2,6 +2,11 @@
 Library    SSHLibrary
 Resource    api.resource
 
+*** Variables ***
+# A suite file does not see the variables of __init__.robot, so the default lives here.
+# Pass -v UPDATE_FROM:<image> to start the update from another image.
+${UPDATE_FROM}    ${EMPTY}
+
 *** Test Cases ***
 Check if postgresql is installed correctly
     # The update scenario has to start from a version a user could be running,
