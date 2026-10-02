@@ -8,7 +8,8 @@ Check if postgresql is installed correctly
     # so it installs the baseline and reaches the image under test through
     # update-module below.
     IF    '${SCENARIO}' == 'update'
-        ${output}  ${rc} =    Execute Command    add-module ${UPDATE_FROM} 1
+        Enable the stephdl forge
+        ${output}  ${rc} =    Execute Command    add-module v18postgresql 1
         ...    return_rc=True
     ELSE
         ${output}  ${rc} =    Execute Command    add-module ${IMAGE_URL} 1
@@ -69,6 +70,13 @@ Check if postgresql survives the update
     Should Contain    ${out}    pre-upgrade
 
 *** Keywords ***
+Enable the stephdl forge
+    # The module is published there, not in the default NS8 repositories.
+    ${rc} =    Execute Command
+    ...    api-cli run add-repository --data '{"name":"stephdl","url":"https://forge.de-labrusse.fr/ns8/updates/","status":true}'
+    ...    return_rc=True    return_stdout=False
+    Should Be Equal As Integers    ${rc}  0
+
 Postgres accepts connections
     ${rc} =    Execute Command
     ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -tAc 'SELECT 1'
