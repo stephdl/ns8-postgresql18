@@ -2,11 +2,6 @@
 Library    SSHLibrary
 Resource    api.resource
 
-*** Variables ***
-# A suite file does not see the variables of __init__.robot, so the default lives here.
-# Pass -v UPDATE_FROM:<image> to start the update from another image.
-${UPDATE_FROM}    ${EMPTY}
-
 *** Test Cases ***
 Check if postgresql is installed correctly
     # The update scenario has to start from a version a user could be running,
@@ -77,7 +72,6 @@ Check if postgresql survives the update
 *** Keywords ***
 Baseline image
     # No NS8 catalog lists this module, so the newest release tag on the registry stands for stable.
-    IF    '${UPDATE_FROM}' != ''    RETURN    ${UPDATE_FROM}
     ${repo} =    Evaluate    '${IMAGE_URL}'.rsplit(':', 1)[0]
     ${tag}  ${rc} =    Execute Command
     ...    podman search --list-tags --limit 1000 --format '{{.Tag}}' ${repo} | grep -E '^[0-9]+\\.[0-9]+\\.[0-9]+$' | sort -V | tail -n 1
