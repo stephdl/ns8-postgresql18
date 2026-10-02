@@ -3,8 +3,8 @@ Library           SSHLibrary
 
 *** Variables ***
 ${SSH_KEYFILE}    %{HOME}/.ssh/id_ecdsa
-# install tests the image on a clean node, update installs the newest
-# release first then upgrades to it.
+# install tests the image on a clean node, update installs the stable
+# release from the stephdl forge first then upgrades to it.
 ${SCENARIO}       install
 
 *** Keywords ***
