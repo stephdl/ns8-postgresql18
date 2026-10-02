@@ -3,10 +3,11 @@ Library           SSHLibrary
 
 *** Variables ***
 ${SSH_KEYFILE}    %{HOME}/.ssh/id_ecdsa
-# install tests the image on a clean node, update installs ${UPDATE_FROM}
-# first then upgrades to it. update-only, CI always passes it via -v; a
-# manual update run must pass it too, there is no built-in default.
+# install tests the image on a clean node, update installs the newest
+# release first then upgrades to it. Pass -v UPDATE_FROM:<image> to start
+# the update from another image.
 ${SCENARIO}       install
+${UPDATE_FROM}    ${EMPTY}
 
 *** Keywords ***
 Connect to the node

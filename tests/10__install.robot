@@ -8,7 +8,8 @@ Check if postgresql is installed correctly
     # so it installs the baseline and reaches the image under test through
     # update-module below.
     IF    '${SCENARIO}' == 'update'
-        ${output}  ${rc} =    Execute Command    add-module ${UPDATE_FROM} 1
+        ${from} =    Baseline image
+        ${output}  ${rc} =    Execute Command    add-module ${from} 1
         ...    return_rc=True
     ELSE
         ${output}  ${rc} =    Execute Command    add-module ${IMAGE_URL} 1
@@ -69,6 +70,17 @@ Check if postgresql survives the update
     Should Contain    ${out}    pre-upgrade
 
 *** Keywords ***
+Baseline image
+    # No NS8 catalog lists this module, so the newest release tag on the registry stands for stable.
+    IF    '${UPDATE_FROM}' != ''    RETURN    ${UPDATE_FROM}
+    ${repo} =    Evaluate    '${IMAGE_URL}'.rsplit(':', 1)[0]
+    ${tag}  ${rc} =    Execute Command
+    ...    podman search --list-tags --limit 1000 --format '{{.Tag}}' ${repo} | grep -E '^[0-9]+\\.[0-9]+\\.[0-9]+$' | sort -V | tail -n 1
+    ...    return_rc=True
+    Should Be Equal As Integers    ${rc}  0
+    Should Not Be Empty    ${tag}    no release tag found on ${repo}
+    RETURN    ${repo}:${tag}
+
 Postgres accepts connections
     ${rc} =    Execute Command
     ...    runagent -m ${module_id} podman exec postgresql-app psql -U postgres -tAc 'SELECT 1'
