@@ -21,7 +21,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-postgresql18 container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-postgresql18; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-postgresql18 -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-postgresql18 -v "${PWD}:/usr/src:Z" docker.io/library/node:24.22.2
 fi
 
 echo "Build static UI files with node..."
